@@ -1,9 +1,7 @@
 # Notes-Application
 Signup Screen
-![signup](https://github.com/Nai1a1/Notes-Application/assets/139915939/ae1a5564-6393-45df-9068-c859bf41b170)
-Login Screen
+![signup(1)](https://github.com/Nai1a1/Notes-Application/assets/139915939/67888613-5fa0-428d-8c11-73d98a7258f0)
+![Add_note(1)](https://github.com/Nai1a1/Notes-Application/assets/139915939/cfaf26bd-073b-4ae1-9fca-b5e98f0e8abf)
+![Login(1)](https://github.com/Nai1a1/Notes-Application/assets/139915939/216929c6-dc41-4965-836f-31211afd399e)
+![Show_notes(1)](https://github.com/Nai1a1/Notes-Application/assets/139915939/533c90a6-f108-4d0d-94bf-1f6aef1d8084)
 
-Add New Note Screen
-![Add_note](https://github.com/Nai1a1/Notes-Application/assets/139915939/8019ae30-c2dc-49d9-b2d6-1a2e7083e1b1)
-Home Screen
-![Show_notes](https://github.com/Nai1a1/Notes-Application/assets/139915939/faa8406e-fd52-494a-9e5d-aa0fd94bde05)
