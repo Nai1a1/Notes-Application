@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/offWhite"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar_layout">
+    <TextView
+        android:id="@+id/welcomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="56dp"
+        android:layout_centerHorizontal="true"
+        android:text="My Notes"
+        android:textStyle="bold"
+        android:textSize="32dp"/>
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            app:menu_openDirection="down"
+            app:menu_showShadow="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="10dp"
+            app:menu_colorNormal="@color/offWhite"
+            app:menu_colorPressed="@color/myBrown"
+            android:backgroundTint="@color/offWhite"
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/baseline_format_list_bulleted_24"
+            tools:ignore="RelativeOverlap">
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_logout_24"
+                app:fab_colorNormal="@color/offWhite"
+                app:fab_showShadow="true"
+                app:fab_size="mini" />
+
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar_layout"
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"/>
+
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/addNoteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="@color/myBrown"
+            app:fab_colorPressed="@color/myBrown"
+            app:fab_showShadow="true"
+            app:fab_size="normal" />
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
