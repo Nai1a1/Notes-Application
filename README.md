@@ -1,4 +1,8 @@
 # Notes-Application
+# Overview
+
+The Note Application is designed to help you capture, organize, and manage your notes. You can access them from any device securely in the cloud. We're currently working on adding more features.
+
 Signup Screen 
 
 ![signup](https://github.com/Nai1a1/Notes-Application/assets/139915939/74d13e46-0e15-4329-a09a-cf6de9584aad)
