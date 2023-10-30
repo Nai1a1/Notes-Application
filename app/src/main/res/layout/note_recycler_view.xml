@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
+    android:padding="10dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginVertical="4dp"
@@ -15,26 +15,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/note_title"
         android:text="note title"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginVertical="4dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/note_content"
         android:text="note content"
-        android:maxLines="2"
+        android:maxLines="3"
         android:ellipsize="end"
-        android:textSize="17sp"
-        android:layout_marginVertical="4dp"/>
+        android:textSize="15sp"
+        android:layout_marginVertical="3dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/note_time"
         android:text="note time"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:gravity="right"
-        android:layout_marginVertical="4dp"/>
+        android:layout_marginVertical="2dp"/>
 
 </LinearLayout>

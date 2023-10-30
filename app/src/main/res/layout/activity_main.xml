@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             app:menu_openDirection="down"
-            app:menu_showShadow="true"
+            app:menu_showShadow="false"
             android:layout_marginEnd="6dp"
             android:layout_marginTop="10dp"
             app:menu_colorNormal="@color/offWhite"
