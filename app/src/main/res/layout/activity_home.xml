@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/offWhite"
+    tools:context=".HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar_layout">
+        <TextView
+            android:id="@+id/welcomeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="56dp"
+            android:layout_centerHorizontal="true"
+            android:text="Welcome"
+            android:textStyle="bold"
+            android:textSize="32dp"/>
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            app:menu_openDirection="down"
+            app:menu_showShadow="false"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="10dp"
+            app:menu_colorNormal="@color/offWhite"
+            app:menu_colorPressed="@color/myBrown"
+            android:backgroundTint="@color/offWhite"
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/baseline_format_list_bulleted_24"
+            tools:ignore="RelativeOverlap">
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_logout_24"
+                app:fab_colorNormal="@color/offWhite"
+                app:fab_showShadow="true"
+                app:fab_size="mini" />
+
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/title_bar_layout"
+        android:columnCount="2"
+        android:rowCount="1">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardNotes"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="@color/myBrown"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Notes"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textSize="23sp"
+                android:textColor="@color/offWhite"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardList"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="@color/myBrown"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To-Do List"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:textSize="23sp"
+                android:textColor="@color/offWhite"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </GridLayout>
+
+
+
+
+</RelativeLayout>

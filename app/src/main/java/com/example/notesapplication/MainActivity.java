@@ -22,11 +22,10 @@ import com.google.firebase.firestore.Query;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView noteRecycler;
-    NoteClass note;
     NoteAdapter noteAdapter;
 
 
-    FloatingActionButton logoutBtn,addNote;
+    FloatingActionButton addNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         addNote = findViewById(R.id.addNoteBtn);
         noteRecycler = findViewById(R.id.recyclerView);
-        logoutBtn = findViewById(R.id.logoutButton);
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                finish();
-            }
-        });
         addNote.setOnClickListener(V -> startActivity(new Intent(MainActivity.this , NoteDetailsActivity.class)));
         setupNoteRecycler();
     }

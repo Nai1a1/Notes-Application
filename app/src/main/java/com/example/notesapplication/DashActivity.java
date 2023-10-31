@@ -24,7 +24,7 @@ public class DashActivity extends AppCompatActivity {
                     startActivity(new Intent(DashActivity.this , LoginActivity.class));
                     finish();
                 }else {
-                    startActivity(new Intent(DashActivity.this , MainActivity.class));
+                    startActivity(new Intent(DashActivity.this , HomeActivity.class));
                     //FirebaseAuth.getInstance().signOut();
                 }
             }

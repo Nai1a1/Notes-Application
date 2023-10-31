@@ -22,32 +22,6 @@
         android:textStyle="bold"
         android:textSize="32dp"/>
 
-        <com.github.clans.fab.FloatingActionMenu
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            app:menu_openDirection="down"
-            app:menu_showShadow="false"
-            android:layout_marginEnd="6dp"
-            android:layout_marginTop="10dp"
-            app:menu_colorNormal="@color/offWhite"
-            app:menu_colorPressed="@color/myBrown"
-            android:backgroundTint="@color/offWhite"
-            app:menu_fab_size="normal"
-            app:menu_icon="@drawable/baseline_format_list_bulleted_24"
-            tools:ignore="RelativeOverlap">
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/logoutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_logout_24"
-                app:fab_colorNormal="@color/offWhite"
-                app:fab_showShadow="true"
-                app:fab_size="mini" />
-
-
-        </com.github.clans.fab.FloatingActionMenu>
 
 
     </RelativeLayout>
