@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +16,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class MainActivity extends AppCompatActivity {
+public class NotesActivity extends AppCompatActivity {
 
     RecyclerView noteRecycler;
     NoteAdapter noteAdapter;
@@ -30,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_notes);
 
         addNote = findViewById(R.id.addNoteBtn);
         noteRecycler = findViewById(R.id.recyclerView);
 
-        addNote.setOnClickListener(V -> startActivity(new Intent(MainActivity.this , NoteDetailsActivity.class)));
+        addNote.setOnClickListener(V -> startActivity(new Intent(NotesActivity.this , NoteDetailsActivity.class)));
         setupNoteRecycler();
     }
 

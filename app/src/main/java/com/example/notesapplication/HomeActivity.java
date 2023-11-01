@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class HomeActivity extends AppCompatActivity {
 
     FloatingActionButton logoutBtn;
-    CardView notesCard;
+    CardView notesCard,listCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +21,10 @@ public class HomeActivity extends AppCompatActivity {
 
         logoutBtn = findViewById(R.id.logoutButton);
         notesCard = findViewById(R.id.cardNotes);
+        listCard = findViewById(R.id.cardList);
 
-        notesCard.setOnClickListener(V -> startActivity(new Intent(HomeActivity.this , MainActivity.class)));
+        notesCard.setOnClickListener(V -> startActivity(new Intent(HomeActivity.this , NotesActivity.class)));
+        listCard.setOnClickListener(V -> startActivity(new Intent(HomeActivity.this , ListActivity.class)));
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
