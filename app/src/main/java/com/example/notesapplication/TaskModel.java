@@ -2,11 +2,17 @@ package com.example.notesapplication;
 
 import com.google.firebase.Timestamp;
 
+import java.util.Calendar;
+
 public class TaskModel {
 
-    String task;
-    String dueDate;
-    int status;
+    private String task;
+    private String dueDate;
+    private int status;
+
+
+
+    String taskID;
     Timestamp timestamp;
 
     public TaskModel(String task, String dueDate, int status, Timestamp timestamp) {
@@ -49,5 +55,12 @@ public class TaskModel {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
     }
 }

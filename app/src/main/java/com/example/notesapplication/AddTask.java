@@ -1,5 +1,7 @@
 package com.example.notesapplication;
 
+import static android.content.Intent.getIntent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -7,6 +9,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddTask extends BottomSheetDialogFragment {
 
@@ -39,8 +44,6 @@ public class AddTask extends BottomSheetDialogFragment {
     private ImageButton saveBtn;
     private Context context;
     private String dueDate = "";
-    private String id = "";
-    private String dueDateUpdate = "";
 
     public static AddTask newInstance(){
         return new AddTask();
@@ -60,7 +63,19 @@ public class AddTask extends BottomSheetDialogFragment {
         taskEdt = view.findViewById(R.id.task_edittext);
         saveBtn = view.findViewById(R.id.save_task);
 
-
+        /*final Bundle bundle = getArguments();
+        if(bundle!=null){
+            String task = bundle.getString("task");
+            // private Calendar date;
+            String id = bundle.getString("id");
+            String dueDateUpdate = bundle.getString("due");
+            taskEdt.setText(task);
+            setDueDate.setText(dueDateUpdate);
+            if (task.length() > 0){
+                saveBtn.setEnabled(false);
+                saveBtn.setBackgroundColor(Color.GRAY);
+            }
+        }*/
 
         setDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +92,7 @@ public class AddTask extends BottomSheetDialogFragment {
                         month = month + 1;
                         setDueDate.setText(dayOfMonth + "/" + month + "/" + year);
                         dueDate = dayOfMonth + "/" + month +"/"+year;
+                        //calendar.set(year,month,dayOfMonth);
 
                     }
                 } , YEAR , MONTH , DAY);
@@ -85,6 +101,7 @@ public class AddTask extends BottomSheetDialogFragment {
             }
         });
         setDueDate.setText(dueDate);
+
 
         saveBtn.setOnClickListener(V -> saveTask());
 

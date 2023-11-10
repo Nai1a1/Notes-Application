@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/note_time"
+        android:id="@+id/task_time"
         android:text="due time"
         android:textSize="11sp"
         android:gravity="start"
