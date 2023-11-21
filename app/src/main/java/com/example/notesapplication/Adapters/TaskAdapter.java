@@ -1,43 +1,46 @@
-package com.example.notesapplication;
+package com.example.notesapplication.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notesapplication.AddTask;
+import com.example.notesapplication.ListActivity;
+import com.example.notesapplication.Objects.TaskModel;
+import com.example.notesapplication.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel , TaskAdapter.TaskViewHolder> {
+import java.util.List;
+
+public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter.TaskViewHolder> {
+    //private List<TaskModel> taskList;
     Context context;
-    String taskId;
-    FirebaseUser currentUser;
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    private  ListActivity activity;
+    private FirestoreRecyclerOptions<TaskModel> options;
+    //String taskId;
+
 
     public TaskAdapter(@NonNull FirestoreRecyclerOptions<TaskModel> options , ListActivity context) {
         super(options);
-        this.activity = context;
+        this.context = context;
+
 
     }
-    Context getContext(){
-        return this.context;
+
+    public void updateOptions(FirestoreRecyclerOptions<TaskModel> options) {
+        this.options = options;
     }
 
 
@@ -46,23 +49,25 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel , TaskAdapte
         holder.taskTxt.setText(model.getTask());
         holder.dueDateTxt.setText("Due on" + model.getDueDate());
         holder.taskTxt.setChecked(toBoolean(model.getStatus()));
-        //En cliquent sur le task
-        taskId = this.getSnapshots().getSnapshot(position).getId();
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference collectionReference = firestore.collection("NOTES").document(currentUser.getUid()).
+        String taskId = this.getSnapshots().getSnapshot(position).getId();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = FirebaseFirestore.getInstance()
+                .collection("NOTES").document(currentUser.getUid()).
                 collection("USER_TO-DO_LIST");
 
-        /*holder.taskTxt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.taskTxt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    collectionReference.document(model.taskID).update("status" , 1);
+                    collectionReference.document(taskId).update("status" , 1);
                 }else{
-                    collectionReference.document(model.taskID).update("status" , 0);
+                    collectionReference.document(taskId).update("status" , 0);
                 }
             }
         });
+        /*
             Bundle bundle = new Bundle();
             bundle.putString("task",model.getTask());
             bundle.putString("dueDate",model.getDueDate());
@@ -73,6 +78,9 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel , TaskAdapte
             AddTask addNewTask = new AddTask();
             addNewTask.setArguments(bundle);*/
     }
+
+
+
     boolean toBoolean(int b){
         return b != 0;
     }
@@ -84,19 +92,20 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel , TaskAdapte
         return new TaskAdapter.TaskViewHolder(view);
 
     }
-    void deleteTask(){
+
+    /*public void deleteTask(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
                 .document(currentUser.getUid()).collection("USER_TO-DO_LIST");
 
         DocumentReference documentReference = collectionReference.document(taskId);
         documentReference.delete();
-    }
+    }*/
 
-    void editTask(){
+    /*void editTask(){
         AddTask addTask = new AddTask();
         addTask.show(activity.getSupportFragmentManager() , addTask.getTag());
-    }
+    }*/
 
 
     static class TaskViewHolder extends RecyclerView.ViewHolder{

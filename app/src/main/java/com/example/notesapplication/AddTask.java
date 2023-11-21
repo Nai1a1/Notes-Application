@@ -1,27 +1,27 @@
 package com.example.notesapplication;
 
-import static android.content.Intent.getIntent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.notesapplication.Objects.TaskModel;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -32,9 +32,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTask extends BottomSheetDialogFragment {
 
@@ -101,12 +103,18 @@ public class AddTask extends BottomSheetDialogFragment {
             }
         });
         setDueDate.setText(dueDate);
-
-
-        saveBtn.setOnClickListener(V -> saveTask());
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveTask();
+                passData();
+            }
+        });
 
 
     }
+
+
     void saveTask(){
         String task = taskEdt.getText().toString();
 
@@ -141,6 +149,13 @@ public class AddTask extends BottomSheetDialogFragment {
         });
         dismiss();
     }
+
+    public void passData(){
+        String task = taskEdt.getText().toString();
+        Map<String , Object> taskMap = new HashMap<>();
+        taskMap.put("TASK" , task);
+        taskMap.put("DUE DATE" , dueDate);
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -148,9 +163,30 @@ public class AddTask extends BottomSheetDialogFragment {
     }
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
+
+        onBottomSheetDismissed();
+
+
+
+    }
+    private void onBottomSheetDismissed() {
         Activity activity = getActivity();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = FirebaseFirestore.getInstance()
+                .collection("NOTES")
+                .document(currentUser.getUid())
+                .collection("USER_TO-DO_LIST");
+
+        Query updatedQuery = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<TaskModel> updatedOptions = new FirestoreRecyclerOptions.Builder<TaskModel>()
+                .setQuery(updatedQuery, TaskModel.class)
+                .build();
+
         if (activity instanceof  OnDialogCloseListener){
-            ((OnDialogCloseListener)activity).onDialogClose(dialog);
+            ((OnDialogCloseListener)activity).onBottomSheetDismissed();
+
         }
     }
 

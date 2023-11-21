@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.notesapplication.Adapters.TaskAdapter;
+import com.example.notesapplication.Objects.TaskModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.util.Collections;
 
 public class ListActivity extends AppCompatActivity implements OnDialogCloseListener {
 
@@ -32,9 +34,14 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
 
         addTask = findViewById(R.id.addTaskBtn);
         listRecycler = findViewById(R.id.recyclerView);
-        listRecycler.setHasFixedSize(true);
 
-        addTask.setOnClickListener(V -> AddTask.newInstance().show(getSupportFragmentManager() , AddTask.TAG));
+        addTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddTask.newInstance().show(getSupportFragmentManager(), AddTask.TAG);
+                listRecycler.smoothScrollToPosition(0);
+            }
+        });
         setUpRecyclerView();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new TouchHelper(taskAdapter));
         itemTouchHelper.attachToRecyclerView(listRecycler);
@@ -48,10 +55,10 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
         Query query = collectionReference.orderBy("timestamp" , Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<TaskModel> options = new FirestoreRecyclerOptions.Builder<TaskModel>()
                 .setQuery(query , TaskModel.class).build();
-        taskAdapter.notifyDataSetChanged();
         listRecycler.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new TaskAdapter(options , this);
         listRecycler.setAdapter(taskAdapter);
+
 
 
     }
@@ -73,10 +80,28 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
         taskAdapter.notifyDataSetChanged();
     }
 
+
+
     @Override
-    public void onDialogClose(DialogInterface dialogInterface) {
-        setUpRecyclerView();
+    public void onBottomSheetDismissed() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = FirebaseFirestore.getInstance()
+                .collection("NOTES")
+                .document(currentUser.getUid())
+                .collection("USER_TO-DO_LIST");
+
+        Query updatedQuery = collectionReference.orderBy("timestamp", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<TaskModel> updatedOptions = new FirestoreRecyclerOptions.Builder<TaskModel>()
+                .setQuery(updatedQuery, TaskModel.class)
+                .build();
+        taskAdapter.updateOptions(updatedOptions);
+        taskAdapter.startListening();
+
         taskAdapter.notifyDataSetChanged();
+
+
+
 
     }
 }

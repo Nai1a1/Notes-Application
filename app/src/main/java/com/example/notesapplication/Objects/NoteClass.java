@@ -1,4 +1,4 @@
-package com.example.notesapplication;
+package com.example.notesapplication.Objects;
 
 import com.google.firebase.Timestamp;
 

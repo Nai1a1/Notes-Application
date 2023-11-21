@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notesapplication.Adapters.TaskAdapter;
+
 public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     private TaskAdapter taskAdapter;
 
@@ -24,7 +26,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-        if (direction == ItemTouchHelper.RIGHT) {
+        /*if (direction == ItemTouchHelper.RIGHT) {
             AlertDialog.Builder builder = new AlertDialog.Builder(taskAdapter.getContext());
             builder.setMessage("Are You Sure?")
                     .setTitle("Delete Task")
@@ -45,6 +47,6 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
             dialog.show();
         }else {
             taskAdapter.editTask();
-        }
+        }*/
     }
 }

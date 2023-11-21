@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import com.example.notesapplication.Adapters.NoteAdapter;
+import com.example.notesapplication.Objects.NoteClass;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;

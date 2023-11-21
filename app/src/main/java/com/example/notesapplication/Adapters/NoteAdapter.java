@@ -1,4 +1,4 @@
-package com.example.notesapplication;
+package com.example.notesapplication.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notesapplication.NoteDetailsActivity;
+import com.example.notesapplication.Objects.NoteClass;
+import com.example.notesapplication.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -25,14 +28,14 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<NoteClass,NoteAdapter.
 
     @Override
     protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull NoteClass model) {
-        holder.titleTxt.setText(model.noteTitle);
-        holder.contentTxt.setText(model.noteContent);
-        holder.timestampTxt.setText(new SimpleDateFormat("dd/MM/yyyy").format(model.timestamp.toDate()));
+        holder.titleTxt.setText(model.getNoteTitle());
+        holder.contentTxt.setText(model.getNoteContent());
+        holder.timestampTxt.setText(new SimpleDateFormat("dd/MM/yyyy").format(model.getTimestamp().toDate()));
 
         holder.itemView.setOnClickListener((v)->{
-            Intent intent = new Intent(context,NoteDetailsActivity.class);
-            intent.putExtra("title",model.noteTitle);
-            intent.putExtra("content",model.noteContent);
+            Intent intent = new Intent(context, NoteDetailsActivity.class);
+            intent.putExtra("title", model.getNoteTitle());
+            intent.putExtra("content", model.getNoteContent());
             //Returns:
             //the backing snapshot array
             String docId = this.getSnapshots().getSnapshot(position).getId();
