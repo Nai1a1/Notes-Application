@@ -1,6 +1,7 @@
 package com.example.notesapplication.Adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,14 @@ import com.example.notesapplication.Objects.TaskModel;
 import com.example.notesapplication.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -30,11 +34,13 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
     Context context;
     private FirestoreRecyclerOptions<TaskModel> options;
     //String taskId;
+    private ListActivity activity;
 
 
     public TaskAdapter(@NonNull FirestoreRecyclerOptions<TaskModel> options , ListActivity context) {
         super(options);
         this.context = context;
+        activity = context;
 
 
     }
@@ -68,15 +74,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
             }
         });
         /*
-            Bundle bundle = new Bundle();
-            bundle.putString("task",model.getTask());
-            bundle.putString("dueDate",model.getDueDate());
-            //Returns:
-            //the backing snapshot array
-            String taskId = this.getSnapshots().getSnapshot(position).getId();
-            bundle.putString("taskId",taskId);
-            AddTask addNewTask = new AddTask();
-            addNewTask.setArguments(bundle);*/
+           */
     }
 
 
@@ -93,20 +91,58 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
 
     }
 
-    /*public void deleteTask(){
+
+    public void deleteTask(int position){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
                 .document(currentUser.getUid()).collection("USER_TO-DO_LIST");
 
+        String taskId = this.getSnapshots().getSnapshot(position).getId();
+
         DocumentReference documentReference = collectionReference.document(taskId);
         documentReference.delete();
-    }*/
+        notifyItemRemoved(position);
+    }
 
-    /*void editTask(){
-        AddTask addTask = new AddTask();
-        addTask.show(activity.getSupportFragmentManager() , addTask.getTag());
-    }*/
+    void editTask(int position){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
+                .document(currentUser.getUid()).collection("USER_TO-DO_LIST");
 
+        String taskId = this.getSnapshots().getSnapshot(position).getId();
+
+
+        collectionReference.document(taskId).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Document exists, handle the data
+                            String task = documentSnapshot.getString("task");
+                            String dueDate = documentSnapshot.getString("dueDate");
+                            //int status = documentSnapshot.getLong("status").intValue();
+
+                            // Do something with the data
+                            Bundle bundle = new Bundle();
+                            bundle.putString("task",task);
+                            bundle.putString("dueDate",dueDate);
+                            AddTask addNewTask = new AddTask();
+                            addNewTask.setArguments(bundle);
+                            addNewTask.show(activity.getSupportFragmentManager() , addNewTask.getTag());
+                            // For example, update UI or process the data
+                        } else {
+                            // Document does not exist
+                            // Handle the case accordingly
+                        }
+                    }
+                });
+
+
+    }
+
+    public Context getContext(){
+        return context;
+    }
 
     static class TaskViewHolder extends RecyclerView.ViewHolder{
         CheckBox taskTxt;

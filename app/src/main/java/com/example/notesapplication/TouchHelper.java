@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notesapplication.Adapters.TaskAdapter;
+import com.example.notesapplication.Objects.TaskModel;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 
 public class TouchHelper extends ItemTouchHelper.SimpleCallback {
-    private TaskAdapter taskAdapter;
+    //private final FirestoreRecyclerAdapter<TaskModel, RecyclerView.ViewHolder> adapter;
+    TaskAdapter taskAdapter;
 
     public TouchHelper(@NonNull TaskAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
@@ -26,27 +29,26 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-        /*if (direction == ItemTouchHelper.RIGHT) {
+        final int position = viewHolder.getAdapterPosition();
+        if (direction == ItemTouchHelper.RIGHT) {
             AlertDialog.Builder builder = new AlertDialog.Builder(taskAdapter.getContext());
             builder.setMessage("Are You Sure?")
                     .setTitle("Delete Task")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            taskAdapter.deleteTask();
-                            taskAdapter.notifyDataSetChanged();
+                            taskAdapter.deleteTask(position);
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            taskAdapter.notifyDataSetChanged();
+                            taskAdapter.notifyItemChanged(position);
 
                         }
                     });
             AlertDialog dialog = builder.create();
             dialog.show();
         }else {
-            taskAdapter.editTask();
-        }*/
+        }
     }
 }

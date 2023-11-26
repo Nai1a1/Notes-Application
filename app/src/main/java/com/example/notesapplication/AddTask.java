@@ -107,7 +107,7 @@ public class AddTask extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 saveTask();
-                passData();
+                //passData();
             }
         });
 
