@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp;
 
 import java.util.Calendar;
 
-public class TaskModel extends TaskID{
+public class TaskModel{
 
     private String task;
     private String dueDate;

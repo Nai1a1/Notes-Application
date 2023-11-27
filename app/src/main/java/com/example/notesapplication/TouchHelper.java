@@ -48,7 +48,8 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                     });
             AlertDialog dialog = builder.create();
             dialog.show();
-        }else {
+        }else if (direction == ItemTouchHelper.LEFT) {
+            taskAdapter.editTask(position);
         }
     }
 }

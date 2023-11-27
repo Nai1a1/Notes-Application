@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ import com.example.notesapplication.Objects.TaskModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.Timestamp;
@@ -46,6 +48,10 @@ public class AddTask extends BottomSheetDialogFragment {
     private ImageButton saveBtn;
     private Context context;
     private String dueDate = "";
+    private Boolean isEditMode = false;
+    private Boolean isUpdate = false;
+    private String taskId;
+
 
     public static AddTask newInstance(){
         return new AddTask();
@@ -65,19 +71,17 @@ public class AddTask extends BottomSheetDialogFragment {
         taskEdt = view.findViewById(R.id.task_edittext);
         saveBtn = view.findViewById(R.id.save_task);
 
-        /*final Bundle bundle = getArguments();
+
+        final Bundle bundle = getArguments();
         if(bundle!=null){
-            String task = bundle.getString("task");
-            // private Calendar date;
-            String id = bundle.getString("id");
-            String dueDateUpdate = bundle.getString("due");
-            taskEdt.setText(task);
-            setDueDate.setText(dueDateUpdate);
-            if (task.length() > 0){
-                saveBtn.setEnabled(false);
-                saveBtn.setBackgroundColor(Color.GRAY);
-            }
-        }*/
+            isEditMode = true;
+            String taskUpdate = bundle.getString("task");
+            taskId = bundle.getString("taskId");
+            dueDate = bundle.getString("dueDate");
+            taskEdt.setText(taskUpdate);
+            setDueDate.setText(dueDate);
+
+        }
 
         setDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +111,6 @@ public class AddTask extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 saveTask();
-                //passData();
             }
         });
 
@@ -117,7 +120,7 @@ public class AddTask extends BottomSheetDialogFragment {
 
     void saveTask(){
         String task = taskEdt.getText().toString();
-
+// verification including both editMode and !editMode
         if(task.isEmpty()){
             taskEdt.setError("Task can not be empty");
         }else{
@@ -130,32 +133,56 @@ public class AddTask extends BottomSheetDialogFragment {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
                 .document(currentUser.getUid()).collection("USER_TO-DO_LIST");
-        DocumentReference documentReference = collectionReference.document();
-        documentReference.set(taskModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show();
 
-                }else{
-                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+        if(isEditMode){
+            collectionReference.document(taskId).update("task" , taskEdt.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                isUpdate = true;
+                            }
+                        }
+                    });
+            collectionReference.document(taskId).update("dueDate" , dueDate)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                isUpdate = true;
+                            }else {
+                                isUpdate = false;
+                            }
+                        }
+                    });
+            if(isUpdate){
+                Toast.makeText(context, "Task edited successfully", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            collectionReference.document().set(taskModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        dismiss();
-    }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
-    public void passData(){
-        String task = taskEdt.getText().toString();
-        Map<String , Object> taskMap = new HashMap<>();
-        taskMap.put("TASK" , task);
-        taskMap.put("DUE DATE" , dueDate);
-    }
+        }
+
+        dismiss();
+        }
+
+
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

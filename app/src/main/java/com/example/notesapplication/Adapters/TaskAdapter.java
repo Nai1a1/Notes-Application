@@ -53,7 +53,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
     @Override
     protected void onBindViewHolder(@NonNull TaskViewHolder holder, int position, @NonNull TaskModel model) {
         holder.taskTxt.setText(model.getTask());
-        holder.dueDateTxt.setText("Due on" + model.getDueDate());
+        holder.dueDateTxt.setText("Due on " + model.getDueDate());
         holder.taskTxt.setChecked(toBoolean(model.getStatus()));
 
         String taskId = this.getSnapshots().getSnapshot(position).getId();
@@ -104,7 +104,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
         notifyItemRemoved(position);
     }
 
-    void editTask(int position){
+    public void editTask(int position){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
                 .document(currentUser.getUid()).collection("USER_TO-DO_LIST");
@@ -122,11 +122,13 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
                             String dueDate = documentSnapshot.getString("dueDate");
                             //int status = documentSnapshot.getLong("status").intValue();
 
+                            AddTask addNewTask = new AddTask();
+
                             // Do something with the data
                             Bundle bundle = new Bundle();
                             bundle.putString("task",task);
                             bundle.putString("dueDate",dueDate);
-                            AddTask addNewTask = new AddTask();
+                            bundle.putString("taskId",taskId);
                             addNewTask.setArguments(bundle);
                             addNewTask.show(activity.getSupportFragmentManager() , addNewTask.getTag());
                             // For example, update UI or process the data
