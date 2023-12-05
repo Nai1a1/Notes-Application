@@ -89,8 +89,10 @@ public class AddTask extends BottomSheetDialogFragment {
             taskUpdate = bundle.getString("task");
             taskId = bundle.getString("taskId");
             dueDate = bundle.getString("dueDate");
+            dueTime = bundle.getString("dueTime");
             taskEdt.setText(taskUpdate);
             setDueDate.setText(dueDate);
+            setDueTime.setText(dueTime);
 
         }
 

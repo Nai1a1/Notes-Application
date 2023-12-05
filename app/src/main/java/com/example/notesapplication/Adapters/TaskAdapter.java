@@ -104,6 +104,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
         notifyItemRemoved(position);
     }
 
+    //OPEN FRAGMENT TO "EDIT" TASK
     public void editTask(int position){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("NOTES")
@@ -120,6 +121,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
                             // Document exists, handle the data
                             String task = documentSnapshot.getString("task");
                             String dueDate = documentSnapshot.getString("dueDate");
+                            String dueTime = documentSnapshot.getString("dueTime");
                             //int status = documentSnapshot.getLong("status").intValue();
 
                             AddTask addNewTask = new AddTask();
@@ -128,6 +130,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
                             Bundle bundle = new Bundle();
                             bundle.putString("task",task);
                             bundle.putString("dueDate",dueDate);
+                            bundle.putString("dueTime",dueTime);
                             bundle.putString("taskId",taskId);
                             addNewTask.setArguments(bundle);
                             addNewTask.show(activity.getSupportFragmentManager() , addNewTask.getTag());
