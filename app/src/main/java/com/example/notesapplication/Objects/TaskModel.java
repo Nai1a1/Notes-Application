@@ -8,20 +8,30 @@ public class TaskModel{
 
     private String task;
     private String dueDate;
+    private String dueTime;
     private int status;
 
 
 
     Timestamp timestamp;
 
-    public TaskModel(String task, String dueDate, int status, Timestamp timestamp) {
+    public TaskModel(String task, String dueDate , String dueTime, int status, Timestamp timestamp) {
         this.task = task;
         this.dueDate = dueDate;
+        this.dueTime = dueTime;
         this.status = status;
         this.timestamp = timestamp;
     }
     public  TaskModel(){
 
+    }
+
+    public String getDueTime() {
+        return dueTime;
+    }
+
+    public void setDueTime(String dueTime) {
+        this.dueTime = dueTime;
     }
 
     public String getTask() {

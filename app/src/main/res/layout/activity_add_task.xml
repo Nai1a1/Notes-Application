@@ -25,10 +25,23 @@
         android:layout_marginTop="8dp"
         android:drawablePadding="8dp"
         android:text="Set Due Date"
-        android:drawableRight="@drawable/baseline_calendar_today_24"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/task_edittext"
+        app:drawableRightCompat="@drawable/baseline_calendar_today_24" />
+
+    <TextView
+        android:id="@+id/set_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:text="Set Due time"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/set_due_tv"
+        app:layout_constraintTop_toBottomOf="@+id/task_edittext"
+        app:drawableRightCompat="@drawable/baseline_access_time_24" />
 
     <ImageButton
         android:id="@+id/save_task"

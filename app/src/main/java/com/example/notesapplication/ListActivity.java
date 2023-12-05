@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -45,6 +49,7 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
         setUpRecyclerView();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new TouchHelper(taskAdapter));
         itemTouchHelper.attachToRecyclerView(listRecycler);
+
     }
 
     void setUpRecyclerView(){
@@ -58,9 +63,6 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
         listRecycler.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new TaskAdapter(options , this);
         listRecycler.setAdapter(taskAdapter);
-
-
-
     }
     @Override
     protected void onStart() {
@@ -99,9 +101,6 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
         taskAdapter.startListening();
 
         taskAdapter.notifyDataSetChanged();
-
-
-
-
     }
+
 }
