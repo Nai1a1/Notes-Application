@@ -32,9 +32,9 @@ import java.util.List;
 public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter.TaskViewHolder> {
     //private List<TaskModel> taskList;
     Context context;
-    private FirestoreRecyclerOptions<TaskModel> options;
+    public FirestoreRecyclerOptions<TaskModel> options;
     //String taskId;
-    private ListActivity activity;
+    public ListActivity activity;
 
 
     public TaskAdapter(@NonNull FirestoreRecyclerOptions<TaskModel> options , ListActivity context) {

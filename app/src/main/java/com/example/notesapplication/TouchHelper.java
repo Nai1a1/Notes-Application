@@ -2,17 +2,18 @@ package com.example.notesapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notesapplication.Adapters.TaskAdapter;
-import com.example.notesapplication.Objects.TaskModel;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class TouchHelper extends ItemTouchHelper.SimpleCallback {
-    //private final FirestoreRecyclerAdapter<TaskModel, RecyclerView.ViewHolder> adapter;
     TaskAdapter taskAdapter;
 
     public TouchHelper(@NonNull TaskAdapter adapter) {
@@ -25,6 +26,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         return false;
     }
+
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
@@ -51,5 +53,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
         }else if (direction == ItemTouchHelper.LEFT) {
             taskAdapter.editTask(position);
         }
+
     }
+
 }

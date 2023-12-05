@@ -13,9 +13,6 @@ public class NotificationHelper {
         Intent notificationIntent = new Intent(context, AlarmReceiver.class);
         notificationIntent.putExtra("content", content);
 
-
-        //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, nextActivity, PendingIntent.FLAG_IMMUTABLE);
-
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
                 0,
