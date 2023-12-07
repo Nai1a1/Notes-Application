@@ -25,6 +25,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,12 +63,19 @@ public class AddTask extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /*if(getDialog() != null){
+            // Set the minimum height of the BottomSheetDialog
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 600);
+        }*/
         return inflater.inflate(R.layout.activity_add_task , container , false);
+
 
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         setDueDate = view.findViewById(R.id.set_due_tv);
         setDueTime = view.findViewById(R.id.set_time_tv);
@@ -281,5 +289,6 @@ public class AddTask extends BottomSheetDialogFragment {
 
         }
     }
+
 
 }
