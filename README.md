@@ -1,6 +1,7 @@
 # Notes-Application
+# npm install
+https://github.com/Nai1a1/Notes-Application/assets/139915939/11406e3f-544e-4827-a9e0-8deb2e885013
 
-https://github.com/Nai1a1/Notes-Application/assets/139915939/325fd633-03e8-4078-9daa-0c0f814579b5
 
 # Overview
 
