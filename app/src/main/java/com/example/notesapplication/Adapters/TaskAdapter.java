@@ -37,10 +37,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
     //private List<TaskModel> taskList;
     Context context;
     public FirestoreRecyclerOptions<TaskModel> options;
-    //String taskId;
     public ListActivity activity;
-    private Vibrator vibrator;
-    private boolean isLongPressActivated = false;
 
 
 
@@ -84,30 +81,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
                 }
             }
         });
-        //Add vibrator when long click item
-        /*vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                // Add your desired behavior on long click here
-                // For example, you can vibrate or perform additional actions
-                v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-
-                vibrate();
-                return true; // Return true to consume the long click event
-            }
-        });*/
     }
-    private void vibrate() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            vibrator.vibrate(100);
-        }
-    }
-
-
-
 
     boolean toBoolean(int b){
         return b != 0;
