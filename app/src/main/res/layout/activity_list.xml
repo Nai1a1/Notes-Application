@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/offWhite"
+    android:background="@color/white"
     tools:context=".ListActivity">
 
     <RelativeLayout
@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="56dp"
             android:layout_centerHorizontal="true"
-            android:text="TO DO List"
+            android:text="My Tasks"
+            android:fontFamily="@font/acme"
+            android:textColor="@color/myBrown"
             android:textStyle="bold"
             android:textSize="32dp"/>
 

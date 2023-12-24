@@ -3,14 +3,15 @@
     <style name="Theme.NotesApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/myBrown</item>
-        <item name="colorPrimaryVariant">@color/offWhite</item>
+        <item name="colorPrimaryVariant">@color/myBrown</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/offWhite</item>
+        <item name="colorSecondary">@color/myBrown</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/offWhite</item>
+        <item name="android:statusBarColor">@color/myBrown</item>
+        <item name="android:windowContentTransitions">true</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

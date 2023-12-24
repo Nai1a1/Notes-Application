@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.notesapplication.Objects.NoteClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NoteDetailsActivity extends AppCompatActivity {
 
-    private EditText noteTitleEdt, noteContentEdt;
+    private EditText noteTitleEdt,noteContentEdt;
     private TextView noteTitleTxt;
     private String title, content, docId;
     boolean isEditMode = false;

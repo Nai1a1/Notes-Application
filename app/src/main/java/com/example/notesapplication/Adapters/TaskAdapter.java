@@ -1,7 +1,11 @@
 package com.example.notesapplication.Adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +39,9 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
     public FirestoreRecyclerOptions<TaskModel> options;
     //String taskId;
     public ListActivity activity;
+    private Vibrator vibrator;
+    private boolean isLongPressActivated = false;
+
 
 
     public TaskAdapter(@NonNull FirestoreRecyclerOptions<TaskModel> options , ListActivity context) {
@@ -53,7 +60,11 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
     @Override
     protected void onBindViewHolder(@NonNull TaskViewHolder holder, int position, @NonNull TaskModel model) {
         holder.taskTxt.setText(model.getTask());
-        holder.dueDateTxt.setText("Due on " + model.getDueDate());
+        if(!model.getDueDate().isEmpty()){
+            holder.dueDateTxt.setText("Due on " + model.getDueDate());
+        }else{
+            holder.dueDateTxt.setText("");
+        }
         holder.taskTxt.setChecked(toBoolean(model.getStatus()));
 
         String taskId = this.getSnapshots().getSnapshot(position).getId();
@@ -73,9 +84,28 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<TaskModel, TaskAdapter
                 }
             }
         });
-        /*
-           */
+        //Add vibrator when long click item
+        /*vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // Add your desired behavior on long click here
+                // For example, you can vibrate or perform additional actions
+                v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+
+                vibrate();
+                return true; // Return true to consume the long click event
+            }
+        });*/
     }
+    private void vibrate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(100);
+        }
+    }
+
 
 
 

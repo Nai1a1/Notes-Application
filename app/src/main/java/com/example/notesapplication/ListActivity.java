@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.example.notesapplication.Adapters.TaskAdapter;
 import com.example.notesapplication.Objects.TaskModel;
@@ -34,6 +35,7 @@ public class ListActivity extends AppCompatActivity implements OnDialogCloseList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_list);
 
         addTask = findViewById(R.id.addTaskBtn);

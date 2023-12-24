@@ -6,21 +6,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/offWhite"
+    android:background="@color/white"
     tools:context=".DashActivity">
 
+    <ImageView
+        android:id="@+id/action_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="action_image"
+        android:src="@drawable/check2">
+
+    </ImageView>
+
     <TextView
+        android:id="@+id/dashtxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
         android:text="@string/app_name"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+        android:textColor="#404040"
+        android:textSize="36sp"
+        android:textStyle="bold"/>
 
     <ProgressBar
+        android:id="@+id/progressBar1"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:indeterminateTint="@color/myBrown"
+        android:indeterminateTint="#404040"
         android:layout_margin="16dp"
         />
 

@@ -1,9 +1,13 @@
 package com.example.notesapplication;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -19,6 +23,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     public TouchHelper(@NonNull TaskAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.taskAdapter = adapter;
+
 
     }
 
@@ -55,6 +60,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
         }
 
     }
+
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
         new RecyclerViewSwipeDecorator.Builder(taskAdapter.getContext(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
@@ -68,5 +74,6 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
+
 
 }

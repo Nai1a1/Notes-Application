@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -63,11 +64,6 @@ public class AddTask extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        /*if(getDialog() != null){
-            // Set the minimum height of the BottomSheetDialog
-            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 600);
-        }*/
         return inflater.inflate(R.layout.activity_add_task , container , false);
 
 
@@ -206,8 +202,10 @@ public class AddTask extends BottomSheetDialogFragment {
             if(isUpdate){
                 Toast.makeText(context, "Task edited successfully", Toast.LENGTH_SHORT).show();
             }
-            long delayMillis = calculateDelayMillis();
-            NotificationHelper.scheduleNotification(context, delayMillis, taskUpdate);
+            if(!dueTime.isEmpty()){
+                long delayMillis = calculateDelayMillis();
+                NotificationHelper.scheduleNotification(context, delayMillis, taskUpdate);
+            }
 
         }else {
             collectionReference.document().set(taskModel).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -225,8 +223,10 @@ public class AddTask extends BottomSheetDialogFragment {
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-            long delayMillis = calculateDelayMillis();
-            NotificationHelper.scheduleNotification(context, delayMillis, taskUpdate);
+            if(!dueTime.isEmpty()){
+                long delayMillis = calculateDelayMillis();
+                NotificationHelper.scheduleNotification(context, delayMillis, taskUpdate);
+            }
 
         }
 

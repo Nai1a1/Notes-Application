@@ -4,22 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/offWhite"
+    android:background="@color/white"
     tools:context=".HomeActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:id="@+id/title_bar_layout">
-        <TextView
-            android:id="@+id/welcomeTxt"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="56dp"
-            android:layout_centerHorizontal="true"
-            android:text="Welcome"
-            android:textStyle="bold"
-            android:textSize="32dp"/>
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:id="@+id/welcomeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="56dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Welcome"
+                android:textColor="@color/myBrown"
+                android:textStyle="bold"
+                android:textSize="32dp"/>
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/check2"
+                android:transitionName="action_image"
+                tools:layout_editor_absoluteX="-45dp"
+                tools:layout_editor_absoluteY="-45dp" />
+
+
+
+        </RelativeLayout>
+
+
+
 
         <com.github.clans.fab.FloatingActionMenu
             android:layout_width="wrap_content"
@@ -30,7 +53,7 @@
             app:menu_showShadow="false"
             android:layout_marginEnd="6dp"
             android:layout_marginTop="10dp"
-            app:menu_colorNormal="@color/offWhite"
+            app:menu_colorNormal="@color/white"
             app:menu_colorPressed="@color/myBrown"
             android:backgroundTint="@color/offWhite"
             app:menu_fab_size="normal"
@@ -41,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_logout_24"
-                app:fab_colorNormal="@color/offWhite"
+                app:fab_colorNormal="@color/white"
                 app:fab_showShadow="true"
                 app:fab_size="mini" />
 
@@ -56,8 +79,9 @@
         android:layout_height="160dp"
         android:layout_below="@id/title_bar_layout"
         android:columnCount="2"
+        android:layout_marginTop="-80dp"
         android:rowCount="1">
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardNotes"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -79,8 +103,8 @@
                 android:textColor="@color/offWhite"
                 android:textStyle="bold"/>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardList"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -96,13 +120,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To-Do List"
+                android:text="My Tasks"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:textSize="23sp"
                 android:textColor="@color/offWhite"
                 android:textStyle="bold"/>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
     </GridLayout>
