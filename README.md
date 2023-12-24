@@ -1,4 +1,7 @@
 # Notes-Application
+
+https://github.com/Nai1a1/Notes-Application/assets/139915939/325fd633-03e8-4078-9daa-0c0f814579b5
+
 # Overview
 
 The Note Application is designed to help you capture and organize your thoughts seamlessly. Whether you're jotting down quick notes or managing your to-do list. You can access them from any device securely in the cloud.
